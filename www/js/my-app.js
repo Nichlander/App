@@ -14,10 +14,10 @@ var app = new Framework7({
     },
     // Add default routes
     routes: [
-      {
-        path: '/about/',
-        url: 'about.html',
-      },
+      { path: '/index/',            url: 'index.html', },
+      { path: '/registro/',         url: 'registro.html', },
+      { path: '/confirmacion/',     url: 'confirmacion.html', },
+      { path: '/info/',             url: 'info.html', },
     ]
     // ... other parameters
   });
@@ -35,9 +35,52 @@ $$(document).on('page:init', function (e) {
     console.log(e);
 })
 
+
+
 // Option 2. Using live 'page:init' event handlers for each page
-$$(document).on('page:init', '.page[data-name="about"]', function (e) {
-    // Do something here when page with data-name="about" attribute loaded and initialized
-    console.log(e);
-    alert('Hello');
+$$(document).on('page:init', '.page[data-name="index"]', function (e) {
+    $$("#btnRegistro").on("click", fnregistro);
 })
+
+$$(document).on('page:init', '.page[data-name="registro"]', function (e) {
+    $$("#btnFinRegistro").on("click", fnFinRegistro);
+})
+
+$$(document).on('page:init', '.page[data-name="confirmacion"]', function (e) {
+    $$("#confNombre").text(nombre)
+    $$("#confEmail").text(email)
+})
+
+$$(document).on('page:init', '.page[data-name="info"]', function (e) {
+    
+}) 
+
+
+
+
+
+
+
+
+
+    /* Mis funciones */
+var email, clave, nombre, apellido
+function fnregistro() {
+  email = $$("indexEmail").val();
+  clave = $$("indexClave").val();
+
+  if (email!="" && clave!="") {
+      mainView.router.navigate("/registro/");
+
+  }
+}
+
+function fnFinRegistro() {
+  nombre = $$("regNombre").val();
+  apellido = $$("regApellido").val();
+
+  if (nombre!="" && apellido!="") {
+      mainView.router.navigate("/confirmacion/");
+
+  }
+}
